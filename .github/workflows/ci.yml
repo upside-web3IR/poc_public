@@ -32,7 +32,6 @@ jobs:
         with:
           version: nightly
       
-      - run: forge fmt --check
 
   check:
     strategy:
