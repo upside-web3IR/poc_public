@@ -52,6 +52,8 @@ jobs:
 
       - name: Run Forge build
         run: |
+          forge install
+          forge remappings > remappings.txt
           forge --version
           forge build --sizes
         id: build

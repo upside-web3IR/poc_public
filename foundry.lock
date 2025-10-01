@@ -2,6 +2,12 @@
   "lib/forge-std": {
     "rev": "c7be2a3481f9e51230880bb0949072c7e3a4da82"
   },
+  "lib/openzeppelin-contracts": {
+    "tag": {
+      "name": "v5.4.0",
+      "rev": "c64a1edb67b6e3f4a15cca8909c9482ad33a02b0"
+    }
+  },
   "lib/openzeppelin-contracts-upgradeable": {
     "tag": {
       "name": "v5.4.0",
