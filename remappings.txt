@@ -1,2 +1,12 @@
 ds-test/=lib/forge-std/lib/ds-test/src/
 forge-std/=lib/forge-std/src/
+@uniswap/v4-core/=lib/v4-core/
+biddog/=lib/biddog/src/
+flood-contracts/=lib/flood-contracts/
+multicaller/=lib/multicaller/src/
+permit2/=lib/permit2/
+solady/=lib/solady/src/
+solmate/=lib/solmate/src/
+clones-with-immutable-args/=lib/clones-with-immutable-args/src/
+create3-factory/=lib/create3-factory/src/
+openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts/

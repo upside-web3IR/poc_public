@@ -17,3 +17,5 @@ out/
 .history
 
 foundry.toml
+
+.DS_Store

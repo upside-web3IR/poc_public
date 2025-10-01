@@ -1,0 +1,25 @@
+# Ignores development broadcast logs
+!/broadcast
+contracts/broadcast/**/*
+/broadcast/**/dry-run/
+broadcast
+
+# env file
+.DS_Store
+.env
+*.env
+.env*
+.env.local
+.env.production
+
+# Forge deps
+node_modules
+**/node_modules
+
+# Compiler files
+cache/
+out/
+
+# Rust
+**/target/
+**/Cargo.lock

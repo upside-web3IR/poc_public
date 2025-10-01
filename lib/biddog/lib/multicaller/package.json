@@ -1,0 +1,13 @@
+{
+  "name": "multicaller",
+  "license": "MIT",
+  "version": "1.3.2",
+  "description": "Efficient multicaller contract",
+  "files": [
+    "src/**/*.sol"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vectorized/multicaller.git"
+  }
+}
