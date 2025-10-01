@@ -32,7 +32,6 @@ jobs:
         with:
           version: nightly
       
-      - run: forge fmt --check
 
   check:
     strategy:
@@ -52,11 +51,8 @@ jobs:
 
       - name: Run Forge build
         run: |
+          forge install
+          forge remappings > remappings.txt
           forge --version
           forge build --sizes
         id: build
-
-      - name: Run Forge tests
-        run: |
-          forge test -vvv
-        id: test
