@@ -1126,6 +1126,7 @@ interface Uni_Router_V3 {
     struct ExactInputParams {
         bytes path;
         address recipient;
+        uint256 deadline;
         uint256 amountIn;
         uint256 amountOutMinimum;
     }
@@ -4876,6 +4877,11 @@ interface VyperContract {
         uint256 _token_amount,
         int128 i,
         uint256 min_amount
+    ) external;
+
+    function remove_liquidity(
+        uint256 _amount,
+        uint256[3] calldata min_amounts
     ) external;
 }
 

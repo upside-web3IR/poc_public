@@ -4,3 +4,12 @@ out = "out"
 libs = ["lib"]
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+
+# Ankr RPC endpoints (https://www.ankr.com/rpc/)
+[rpc_endpoints]
+eth = "${ETH_RPC_URL}"
+gnosis = "${GNOSIS_RPC_URL}"
+polygon = "${POLYGON_RPC_URL}"
+arbitrum = "https://arb-mainnet.g.alchemy.com/v2/mI-8iQEK1K8m_VsMscNTMVx4EBtuDVmK"
+base = "https://base-mainnet.g.alchemy.com/v2/mI-8iQEK1K8m_VsMscNTMVx4EBtuDVmK"
+mainnet = "https://eth.llamarpc.com"
