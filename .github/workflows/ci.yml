@@ -3,11 +3,10 @@ name: test
 on:
   push:
     branches-ignore:
-      - 'assets' 
+      - 'assets'
   pull_request:
     branches-ignore:
-      - 'assets' 
-
+      - 'assets'
 
 env:
   FOUNDRY_PROFILE: ci
@@ -31,7 +30,6 @@ jobs:
         uses: foundry-rs/foundry-toolchain@v1
         with:
           version: nightly
-      
 
   check:
     strategy:
@@ -49,4 +47,10 @@ jobs:
         with:
           version: nightly
 
-# TODO
+      - name: Run Forge build
+        run: |
+          forge install
+          forge remappings > remappings.txt
+          forge --version
+          forge build --sizes
+        id: build

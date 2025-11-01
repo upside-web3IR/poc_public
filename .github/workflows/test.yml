@@ -23,4 +23,17 @@ jobs:
       - name: Show Forge version
         run: |
           forge --version
-# TODO
+      - name: Run Forge fmt
+        run: |
+          forge fmt --check
+        id: fmt
+
+      - name: Run Forge build
+        run: |
+          forge build --sizes
+        id: build
+
+      - name: Run Forge tests
+        run: |
+          forge test -vvv
+        id: test
