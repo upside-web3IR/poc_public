@@ -3915,6 +3915,18 @@ interface IBalancerVault {
             uint256[] memory balances,
             uint256 lastChangeBlock
         );
+    function getPoolTokenInfo(
+        bytes32 poolId,
+        IERC20 token
+    )
+        external
+        view
+        returns (
+            uint256 cash,
+            uint256 managed,
+            uint256 lastChangeBlock,
+            address assetManager
+        );
 }
 
 interface ICointroller {
@@ -6220,7 +6232,6 @@ library FixedPointMathLib {
                     // If n is odd, store x in z for now.
                     z := x
                 }
-
                 // Shifting right by 1 is like dividing by 2.
                 let half := shr(1, scalar)
 
@@ -6288,7 +6299,6 @@ library FixedPointMathLib {
         /// @solidity memory-safe-assembly
         assembly {
             let y := x // We start y at x, which will help us make our initial estimate.
-
             z := 181 // The "correct" value is 1, but this saves a multiplication later.
 
             // This segment is to get a reasonable initial estimate for the Babylonian method. With a bad
