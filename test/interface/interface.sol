@@ -3927,6 +3927,12 @@ interface IBalancerVault {
             uint256 lastChangeBlock,
             address assetManager
         );
+    function queryBatchSwap(
+        SwapKind kind,
+        BatchSwapStep[] memory swaps,
+        address[] memory assets,
+        FundManagement memory funds
+    ) external view returns (int256[] memory assetDeltas);
 }
 
 interface ICointroller {

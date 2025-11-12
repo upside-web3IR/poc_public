@@ -29,3 +29,6 @@ halmos-cheatcodes/=lib/openzeppelin-contracts/lib/halmos-cheatcodes/src/
 leb128-nooffset/=lib/flood-contracts/lib/leb128-nooffset/src/
 openzeppelin-contracts/=lib/openzeppelin-contracts/
 v4-core/=lib/v4-core/src/
+@balancer-labs/v2-interfaces/contracts/=lib/balancer-v2-monorepo/pkg/interfaces/contracts/
+@balancer-labs/solidity-utils/=lib/balancer-v2-monorepo/pkg/solidity-utils/
+@balancer-labs/=lib/balancer-v2-monorepo/pkg/
