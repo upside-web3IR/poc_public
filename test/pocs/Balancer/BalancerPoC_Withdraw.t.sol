@@ -71,9 +71,7 @@ interface Ivault {
 }
 contract BalancerPoC is Test {
     function setUp() public {
-        vm.createSelectFork(
-            "https://mainnet.infura.io/v3/d018ef0e836145409a7dd8b416ad54ed"
-        );
+        vm.createSelectFork();
     }
     function testExploit() public {
         address exploiter = 0x506D1f9EFe24f0d47853aDca907EB8d89AE03207;
