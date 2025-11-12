@@ -80,7 +80,7 @@ contract MetaPoolPoC is Test {
     address exploiter =0x48f1d0F5831Eb6e544f8cBDe777b527b87a1BE98;
     address MEV_Yoink = 0xFDe0d1575Ed8E06FBf36256bcdfA1F359281455A;
     function setUp() public {
-        vm.createSelectFork("https://mainnet.infura.io/v3/d018ef0e836145409a7dd8b416ad54ed", 22722911 - 1);
+        vm.createSelectFork("mainnet", 22722911 - 1);
     }
     function testExploit() public  {
         vm.startPrank(exploiter);
