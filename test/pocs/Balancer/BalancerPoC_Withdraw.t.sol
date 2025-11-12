@@ -70,6 +70,7 @@ interface Ivault {
     function manageUserBalance(UserBalanceOp[] memory ops) external payable;
 }
 
+// @note https://etherscan.io/tx/0xd155207261712c35fa3d472ed1e51bfcd816e616dd4f517fa5959836f5b48569
 contract BalancerPoC is Test {
     function setUp() public {
         vm.createSelectFork("mainnet", 23717404 - 1);
