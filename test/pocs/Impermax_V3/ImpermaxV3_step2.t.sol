@@ -30,7 +30,7 @@ interface ImpermaxV3Borrowable is IERC20 {
     function sync() external;
 }
 
-contract ImpermaxV3PoC is Test {
+contract ImpermaxV3PoC_step2 is Test {
     ImpermaxV3Exploit exploitContract;
     constructor() {
         // Fork Mainnet chain at block just before the exploit
